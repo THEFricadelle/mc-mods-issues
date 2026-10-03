@@ -13,6 +13,10 @@ Before posting:
 - test with the latest version of the mod;
 - upload your log or crash report to [mclo.gs](https://mclo.gs) and paste the link.
 
+## Ask for a permission
+
+Including a mod in a modpack that downloads it from CurseForge or Modrinth needs no request. For anything else the license does not allow (re-hosting, offline packs, modified builds, hosting offers), open a [permission request](../../issues/new?template=permission-request.yml).
+
 ## Mods
 
 All mods target NeoForge for Minecraft 1.21.1.

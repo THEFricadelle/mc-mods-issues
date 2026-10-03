@@ -1,0 +1,62 @@
+name: Permission request
+description: Ask for a permission the mod license does not already grant
+title: "[Permission] "
+labels: ["permission request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **No request needed** to include a mod in a modpack that downloads it from CurseForge or Modrinth, uses the exact official build and keeps all notices (license Section 3(b)). Same for running it on your own server, including a monetized one.
+
+        Use this form for anything else: re-hosting, offline or exported packs, modified builds, hosting offers, use of the mod name, and so on.
+
+        Only the author can grant a permission, and only in writing. No reply is not a yes. This issue is public: do not post private contact details.
+
+  - type: dropdown
+    id: mod
+    attributes:
+      label: Mod concerned
+      options:
+        - "Create: Belgian Snacks"
+        - CustomPerm
+        - Better Creative
+        - Creative Admin
+    validations:
+      required: true
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Type of request
+      options:
+        - Re-host or redistribute the file on another site or channel
+        - Bundle the file in an exported or offline modpack
+        - Distribute a modified build
+        - Offer the mod through a hosting service or one-click install
+        - Use the mod name, logo or identity
+        - Change or remove my contributor credit
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: What you want to do
+      description: Describe the use, the audience and whether it is commercial.
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Modpack, server, website or project page concerned, if any.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I read the mod license and my case is not already covered by it.
+          required: true
