@@ -1,5 +1,5 @@
 name: "Bug: CustomPerm"
-description: Report a bug in CustomPerm
+description: "Report a bug in CustomPerm"
 title: "[CustomPerm] "
 labels: ["bug", "mod: CustomPerm"]
 body:

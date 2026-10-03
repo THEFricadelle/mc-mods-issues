@@ -1,5 +1,5 @@
 name: "Bug: Creative Admin"
-description: Report a bug in Creative Admin
+description: "Report a bug in Creative Admin"
 title: "[Creative Admin] "
 labels: ["bug", "mod: Creative Admin"]
 body:
