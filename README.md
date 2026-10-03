@@ -26,7 +26,7 @@ All mods target NeoForge for Minecraft 1.21.1.
 | Create: Belgian Snacks | [link](https://modrinth.com/mod/create-belgian-snacks) | [link](https://www.curseforge.com/minecraft/mc-mods/create-belgian-snacks) |
 | CustomPerm | [link](https://modrinth.com/mod/customperm) | [link](https://www.curseforge.com/minecraft/mc-mods/customperm) |
 | Better Creative | [link](https://modrinth.com/mod/arcadia-better-creative) | [link](https://www.curseforge.com/minecraft/mc-mods/arcadia-better-creative) |
-| Creative Admin | [link](https://modrinth.com/mod/arcadia-creative-admin) | [link](https://www.curseforge.com/minecraft/mc-mods/arcadia-creative-admin) |
+| Creative Admin | [link](https://modrinth.com/mod/creative-admin) | [link](https://www.curseforge.com/minecraft/mc-mods/creative-admin) |
 
 ## License
 
