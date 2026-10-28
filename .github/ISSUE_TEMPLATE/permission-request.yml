@@ -21,6 +21,7 @@ body:
         - CustomPerm
         - Better Creative
         - Creative Admin
+        - Drop the Beam
     validations:
       required: true
 

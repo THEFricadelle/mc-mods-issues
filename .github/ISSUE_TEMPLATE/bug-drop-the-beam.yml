@@ -1,0 +1,121 @@
+name: "Bug: Drop the Beam"
+description: "Report a bug in Drop the Beam"
+title: "[Drop the Beam] "
+labels: ["bug", "mod: Drop the Beam"]
+body:
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mc-version
+    attributes:
+      label: Minecraft version
+      options:
+        - "1.21.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Loader
+      options:
+        - NeoForge
+    validations:
+      required: true
+
+  - type: input
+    id: loader-version
+    attributes:
+      label: Loader version
+      placeholder: "21.1.x"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: What is affected
+      multiple: true
+      options:
+        - Beams, haze or lighting
+        - Screens, video or webcam
+        - Sound, speakers or music
+        - Stage microphone
+        - Light desk, show or turntable
+        - Interfaces
+        - Server, multiplayer or permissions
+        - Crash
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: render-mods
+    attributes:
+      label: Iris, Sodium and shaderpack
+      description: Their versions and the shaderpack in use, or "none".
+      placeholder: "Iris 1.8.x, Sodium 0.6.x, Complementary Reimagined"
+    validations:
+      required: true
+
+  - type: input
+    id: hardware
+    attributes:
+      label: Graphics card and audio device
+      description: Graphics card with its driver version; for a sound or microphone bug, the operating system and the audio output device.
+      placeholder: "RTX 3070, driver 566.x; Windows 11, USB headset"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: What happens, and what should happen instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: logs
+    attributes:
+      label: Log or crash report
+      description: Upload your file to https://mclo.gs and paste the link here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshot or video
+      description: For anything visual, drop an image or a short clip here.
+
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Other installed mods
+      description: List of mods, or a link to the modpack.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked that this bug has not already been reported.
+          required: true
+        - label: I am using the latest version of the mod.
+          required: true
