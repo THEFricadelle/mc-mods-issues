@@ -1,0 +1,120 @@
+name: "Bug: Festive Skies"
+description: "Report a bug in Festive Skies"
+title: "[Festive Skies] "
+labels: ["bug", "mod: Festive Skies"]
+body:
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mc-version
+    attributes:
+      label: Minecraft version
+      options:
+        - "1.21.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Loader
+      options:
+        - NeoForge
+    validations:
+      required: true
+
+  - type: input
+    id: loader-version
+    attributes:
+      label: Loader version
+      placeholder: "21.1.x"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: What is affected
+      multiple: true
+      options:
+        - Sleigh flight, schedule or sound
+        - Gifts, landing, loot or opening
+        - Shaking the sleigh
+        - Rideable sleigh or whistle
+        - Christmas decorations
+        - Admin menu, commands or config
+        - Server, multiplayer or claims
+        - Crash
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: geckolib
+    attributes:
+      label: GeckoLib version
+      placeholder: "4.9.x"
+    validations:
+      required: true
+
+  - type: input
+    id: date
+    attributes:
+      label: Real date or forced event
+      description: The real date of the server, or the event forced with /festive event, when the bug depends on the season.
+      placeholder: "December 24, or /festive event christmas force on"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: What happens, and what should happen instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: logs
+    attributes:
+      label: Log or crash report
+      description: Upload your file to https://mclo.gs and paste the link here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshot or video
+      description: For anything visual, drop an image or a short clip here.
+
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Other installed mods
+      description: List of mods, or a link to the modpack.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked that this bug has not already been reported.
+          required: true
+        - label: I am using the latest version of the mod.
+          required: true
