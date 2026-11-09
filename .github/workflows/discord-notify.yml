@@ -1,0 +1,211 @@
+# Posts every repository event to Discord with a mention, so it pings.
+# Author: THEFricadelle
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   DISCORD_WEBHOOK_URL  Discord webhook URL, without the /github suffix
+#   DISCORD_MENTION      <@USER_ID> or <@&ROLE_ID>
+#
+# Untrusted text (titles, bodies, commit messages) only goes into the embed,
+# which never pings. Only the mention secret is placed in the message content.
+
+name: Discord notify
+
+on:
+  push:
+  create:
+  delete:
+  fork:
+  watch:
+  public:
+  release:
+  gollum:
+  label:
+  milestone:
+  issues:
+  issue_comment:
+  discussion:
+  discussion_comment:
+  branch_protection_rule:
+  pull_request_target:
+    types: [opened, edited, closed, reopened, synchronize, ready_for_review,
+            converted_to_draft, assigned, unassigned, labeled, unlabeled,
+            review_requested]
+  pull_request_review:
+  pull_request_review_comment:
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Send to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_MENTION: ${{ secrets.DISCORD_MENTION }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.request
+
+          webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
+          if not webhook:
+              print("DISCORD_WEBHOOK_URL is not set, skipping.")
+              sys.exit(0)
+          for suffix in ("/github", "/slack"):
+              if webhook.endswith(suffix):
+                  webhook = webhook[: -len(suffix)]
+
+          mention = (os.environ.get("DISCORD_MENTION") or "").strip()
+          event = os.environ["EVENT_NAME"]
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
+              p = json.load(f)
+
+
+          def cut(text, limit):
+              text = (text or "").strip()
+              return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
+          def first_line(text):
+              lines = (text or "").strip().splitlines()
+              return lines[0] if lines else ""
+
+
+          repo = p.get("repository") or {}
+          sender = p.get("sender") or {}
+          action = (p.get("action") or "").replace("_", " ")
+          url = repo.get("html_url", "")
+          title = f"{event} {action}".strip()
+          desc = ""
+
+          if event == "push":
+              ref = p.get("ref", "")
+              for prefix in ("refs/heads/", "refs/tags/"):
+                  ref = ref.removeprefix(prefix)
+              commits = p.get("commits") or []
+              url = p.get("compare") or url
+              if p.get("deleted"):
+                  title = f"Deleted {ref}"
+              else:
+                  title = f"Pushed {len(commits)} commit(s) to {ref}"
+                  desc = "\n".join(
+                      f"`{c.get('id', '')[:7]}` {cut(first_line(c.get('message')), 100)}"
+                      for c in commits[:10]
+                  )
+                  if len(commits) > 10:
+                      desc += f"\n... and {len(commits) - 10} more"
+          elif event in ("create", "delete"):
+              verb = "Created" if event == "create" else "Deleted"
+              title = f"{verb} {p.get('ref_type', '')} {p.get('ref', '')}"
+          elif event == "fork":
+              forkee = p.get("forkee") or {}
+              title = f"Forked to {forkee.get('full_name', '')}"
+              url = forkee.get("html_url") or url
+          elif event == "watch":
+              title = f"Starred ({repo.get('stargazers_count', '?')} stars)"
+          elif event == "public":
+              title = "Repository made public"
+          elif event == "release":
+              rel = p.get("release") or {}
+              title = f"Release {action}: {rel.get('name') or rel.get('tag_name', '')}"
+              url = rel.get("html_url") or url
+              desc = cut(rel.get("body"), 400)
+          elif event == "gollum":
+              pages = p.get("pages") or []
+              title = "Wiki updated"
+              desc = "\n".join(f"{pg.get('action', '')}: {pg.get('title', '')}" for pg in pages[:10])
+              if pages:
+                  url = pages[0].get("html_url") or url
+          elif event == "label":
+              title = f"Label {action}: {(p.get('label') or {}).get('name', '')}"
+          elif event == "milestone":
+              ms = p.get("milestone") or {}
+              title = f"Milestone {action}: {ms.get('title', '')}"
+              url = ms.get("html_url") or url
+          elif event == "issues":
+              issue = p.get("issue") or {}
+              title = f"Issue {action}: #{issue.get('number')} {issue.get('title', '')}"
+              url = issue.get("html_url") or url
+              if action == "opened":
+                  desc = cut(issue.get("body"), 400)
+              elif action in ("labeled", "unlabeled"):
+                  desc = f"Label: {(p.get('label') or {}).get('name', '')}"
+              elif action in ("assigned", "unassigned"):
+                  desc = f"Assignee: {(p.get('assignee') or {}).get('login', '')}"
+          elif event == "issue_comment":
+              issue = p.get("issue") or {}
+              comment = p.get("comment") or {}
+              kind = "PR" if issue.get("pull_request") else "Issue"
+              title = f"Comment {action} on {kind} #{issue.get('number')} {issue.get('title', '')}"
+              url = comment.get("html_url") or issue.get("html_url") or url
+              desc = cut(comment.get("body"), 400)
+          elif event in ("discussion", "discussion_comment"):
+              disc = p.get("discussion") or {}
+              if event == "discussion":
+                  title = f"Discussion {action}: #{disc.get('number')} {disc.get('title', '')}"
+                  url = disc.get("html_url") or url
+                  if action == "created":
+                      desc = cut(disc.get("body"), 400)
+              else:
+                  comment = p.get("comment") or {}
+                  title = f"Discussion comment {action}: #{disc.get('number')} {disc.get('title', '')}"
+                  url = comment.get("html_url") or disc.get("html_url") or url
+                  desc = cut(comment.get("body"), 400)
+          elif event == "pull_request_target":
+              pr = p.get("pull_request") or {}
+              if action == "closed" and pr.get("merged"):
+                  action = "merged"
+              title = f"PR {action}: #{pr.get('number')} {pr.get('title', '')}"
+              url = pr.get("html_url") or url
+              if action == "opened":
+                  desc = cut(pr.get("body"), 400)
+          elif event in ("pull_request_review", "pull_request_review_comment"):
+              pr = p.get("pull_request") or {}
+              item = p.get("review") or p.get("comment") or {}
+              label = "Review" if event == "pull_request_review" else "Review comment"
+              title = f"{label} {action} on PR #{pr.get('number')} {pr.get('title', '')}"
+              url = item.get("html_url") or pr.get("html_url") or url
+              desc = cut(item.get("body"), 400)
+          elif event == "branch_protection_rule":
+              rule = p.get("rule") or {}
+              title = f"Branch protection {action}: {rule.get('name', '')}"
+
+          embed = {
+              "title": cut(title, 250),
+              "url": url,
+              "color": 0x24292F,
+              "author": {
+                  "name": sender.get("login", "unknown"),
+                  "url": sender.get("html_url", ""),
+                  "icon_url": sender.get("avatar_url", ""),
+              },
+              "footer": {"text": repo.get("full_name", "")},
+          }
+          embed["author"] = {k: v for k, v in embed["author"].items() if v}
+          if not embed["url"]:
+              del embed["url"]
+          if desc:
+              embed["description"] = desc
+
+          payload = {
+              "content": mention,
+              "embeds": [embed],
+              "allowed_mentions": {"parse": ["users", "roles"]},
+          }
+          req = urllib.request.Request(
+              webhook,
+              data=json.dumps(payload).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json",
+                  "User-Agent": "mc-mods-issues-notifier",
+              },
+              method="POST",
+          )
+          with urllib.request.urlopen(req, timeout=15) as resp:
+              print(f"Discord answered {resp.status}")
+          PY
