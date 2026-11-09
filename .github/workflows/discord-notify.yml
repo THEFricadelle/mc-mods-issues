@@ -61,6 +61,11 @@ jobs:
                   webhook = webhook[: -len(suffix)]
 
           mention = (os.environ.get("DISCORD_MENTION") or "").strip()
+          # Accept a bare role ID or a partial form (&ID, @&ID, <@&ID) and
+          # rebuild <@&ID>. A user mention must be written in full as <@ID>.
+          role_id = mention.strip("<>").removeprefix("@").removeprefix("&")
+          if role_id.isdigit() and (mention.startswith("<@&") or not mention.startswith("<@")):
+              mention = f"<@&{role_id}>"
           event = os.environ["EVENT_NAME"]
           with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as f:
               p = json.load(f)
