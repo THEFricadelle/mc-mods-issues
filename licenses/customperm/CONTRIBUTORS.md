@@ -1,0 +1,152 @@
+# Contributors
+
+CustomPerm is authored and maintained by **THEFricadelle**, who holds the
+copyright in the Mod as a whole and is its sole maintainer.
+
+The people below have contributed code, fixes, or documentation to the project.
+Their work is gratefully acknowledged here.
+
+## Maintainer
+
+- **THEFricadelle** — author, architect, and maintainer of the project.
+
+## Contributors
+
+- **curveo** — LuckPerms compatibility audit and event-subscription lifecycle
+  fix; hardening of the command tree, alias manager, and config handling
+  against audit findings (June 2026).
+
+- **pavlojs** — licensing and source-availability audit of the published 1.0.5
+  build: identified eleven compiled classes distributed without their
+  corresponding source under GPL-3.0, and the absence of a tag matching the
+  released jar. The report led to the `v1.0.5` tag, the correction of the
+  relicensing chronology, and the per-version licensing table in NOTICE.md
+  (issue #3, August 2026).
+
+## What contributors get
+
+Under Section 5.3 of the [LICENSE](LICENSE):
+
+- **Credit.** Every merged contribution is credited on this page, by the name
+  or handle the contributor chose and with a description of what they
+  contributed, so the credit identifies the work and not only the person. No
+  contribution will ever be misattributed to someone else. This credit is not
+  withdrawn if the license is later terminated for any reason.
+- **Modpack permission.** You may include CustomPerm in a modpack you publish,
+  on the same terms as everyone else (§3(b)): the pack must reference an
+  Official Channel so the mod is fetched from CurseForge or Modrinth at install
+  time, the unmodified Official Build must be used, and the notices must be
+  preserved. **Having had access to the source never takes this away from
+  you.**
+
+One limit worth stating plainly: you may never ship a build produced from the
+source code — in a modpack or anywhere else. The permission covers the
+Official Build only.
+
+## What this list means — and what it does not
+
+This page exists to **credit** the people who helped. Being listed here is a
+recognition of authorship of a specific contribution, and it is the author's
+commitment that no contribution will ever be misattributed to someone else.
+
+Being listed here does **not**:
+
+- transfer or dilute the copyright in the Mod as a whole;
+- grant any ownership, co-ownership, or co-maintainership of the project;
+- confer any right to redistribute, relicense, fork, or publish the Mod, which
+  remain governed exclusively by [LICENSE](LICENSE);
+- create any entitlement to be consulted on the project's direction, licensing,
+  or releases.
+
+Each contributor retains the copyright in their own contribution and has
+licensed it to the author under Section 5.2 of the [LICENSE](LICENSE). See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the terms that apply when you submit a
+pull request.
+
+## Getting listed
+
+Contributions merged into the official repository, and reports that led to a
+correction, are added here at the maintainer's discretion. If you contributed and are missing from this list, or
+you would prefer a different name, handle, or no contact address, use the
+official issue tracker:
+
+  https://github.com/THEFricadelle/mc-mods-issues/issues/new?template=permission-request.yml
+
+---
+
+# Contributeurs (Version Française)
+
+CustomPerm est écrit et maintenu par **THEFricadelle**, qui détient le copyright
+sur le mod dans son ensemble et en est le seul mainteneur.
+
+Les personnes ci-dessous ont contribué du code, des correctifs ou de la
+documentation au projet. Leur travail est ici salué avec gratitude.
+
+## Mainteneur
+
+- **THEFricadelle** — auteur, architecte et mainteneur du projet.
+
+## Contributeurs
+
+- **curveo** — audit de compatibilité LuckPerms et correction du cycle de vie
+  des souscriptions d'événements ; durcissement de l'arbre de commandes, du
+  gestionnaire d'alias et de la gestion de configuration suite aux constats
+  d'audit (juin 2026).
+
+- **pavlojs** — audit de licence et de disponibilité des sources du build 1.0.5
+  publié : a identifié onze classes compilées distribuées sans leur source
+  correspondante sous GPL-3.0, ainsi que l'absence de tag correspondant au jar
+  publié. Le signalement a conduit au tag `v1.0.5`, à la correction de la
+  chronologie de relicenciement et au tableau des licences par version dans
+  NOTICE.md (issue #3, août 2026).
+
+## Ce que les contributeurs obtiennent
+
+Au titre de la Section 5.3 de la [LICENSE](LICENSE) :
+
+- **Le crédit.** Toute contribution fusionnée est créditée sur cette page, sous
+  le nom ou le pseudonyme choisi par le contributeur et avec une description de
+  ce qu'il a contribué, pour que le crédit identifie le travail et pas seulement
+  la personne. Aucune contribution ne sera jamais attribuée à un tiers. Ce
+  crédit n'est pas retiré si la licence est ultérieurement résiliée, pour
+  quelque motif que ce soit.
+- **La permission modpack.** Vous pouvez inclure CustomPerm dans un modpack que
+  vous publiez, aux mêmes conditions que tout le monde (§3(b)) : le pack doit
+  référencer un canal officiel pour que le mod soit récupéré depuis CurseForge
+  ou Modrinth à l'installation, le build officiel non modifié doit être
+  utilisé, et les mentions doivent être préservées. **Avoir eu accès au code ne
+  vous en prive jamais.**
+
+Une limite à énoncer clairement : vous ne pouvez jamais diffuser un build issu
+du code source — ni dans un modpack, ni ailleurs. La permission ne couvre que
+le build officiel.
+
+## Ce que cette liste signifie — et ce qu'elle ne signifie pas
+
+Cette page existe pour **créditer** les personnes qui ont aidé. Y figurer est une
+reconnaissance de la paternité d'une contribution précise, et l'engagement de
+l'auteur qu'aucune contribution ne sera jamais attribuée à un tiers.
+
+Y figurer ne signifie **pas** :
+
+- un transfert ou une dilution du copyright sur le mod dans son ensemble ;
+- l'octroi d'une propriété, copropriété ou co-maintenance du projet ;
+- un droit de redistribuer, relicencier, forker ou publier le mod, qui restent
+  régis exclusivement par la [LICENSE](LICENSE) ;
+- un droit d'être consulté sur l'orientation du projet, sa licence ou ses
+  publications.
+
+Chaque contributeur conserve le copyright sur sa propre contribution et l'a
+licenciée à l'auteur au titre de la Section 5.2 de la [LICENSE](LICENSE). Voir
+[CONTRIBUTING.md](CONTRIBUTING.md) pour les conditions applicables à toute pull
+request.
+
+## Être ajouté à la liste
+
+Les contributions fusionnées dans le dépôt officiel, ainsi que les
+signalements ayant conduit à une correction, sont ajoutés ici à la discrétion
+du mainteneur. Si vous avez contribué et n'apparaissez pas dans cette
+liste, ou si vous préférez un autre nom, pseudonyme ou aucune adresse de
+contact, passez par le tracker d'issues officiel :
+
+  https://github.com/THEFricadelle/mc-mods-issues/issues/new?template=permission-request.yml
